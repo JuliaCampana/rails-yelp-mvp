@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to restaurant_path(@restaurant)
     else
-      render "restaurants/show"
+      render "restaurants/new"
     end
   end
 
@@ -64,6 +64,10 @@ class ReviewsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
+    end
+
+    def review_params
+      params.require(:review).permit(:rating, :content)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
